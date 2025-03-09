@@ -1,1 +1,1 @@
-# Predicting Recipe Ratings Based on Text Analysis
+# Recipe Rating Prediction Based on Text Analysis of Consumer Reviews
