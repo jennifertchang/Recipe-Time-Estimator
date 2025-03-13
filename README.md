@@ -26,11 +26,18 @@ By analyzing these features, we aim to uncover patterns that influence cooking t
 - The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
 ## Step 4: Hypothesis Testing
-Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion. Justify why these choices are good choices for answering the question you are trying to answer.
+After looking at the data, we noted that there were tags that related to cooking time. In this hypothesis testing we will be focusing on recipes belonging to these two tags: "60-minutes-or-less" tag amd "30-minutes-or-less"
+- $H_0$: There is no difference mean minutes between these recipes from the two mentioned tags tags
+- $H_A$: The mean minutes for "30-minutes-or-less" is significantly less than the mean minutes for "60-minutes-or-less"
 
-Optional: Embed a visualization related to your hypothesis test in your website.
 
-Tip: When making writing your conclusions to the statistical tests in this project, never use language that implies an absolute conclusion; since we are performing statistical tests and not randomized controlled trials, we cannot prove that either hypothesis is 100% true or false.
+Our test statistic will be the difference in mean minutes (not absolute difference because we predict the difference to be "less than" rather than "different to")
+
+We will be performing a one-tailed permutation test, with N=10_000 and $\alpha$=0.05, to obtain a p-value which we will use to draw our conclusions
+
+![hypothesis tesing histogram](images/hypothesis_histogram.png)
+
+The p-value, 0.0, is less than our significance level 0.05, therefore we have sufficient evidence to reject the null and conclude that the recipes with the 30_minutes_or_less tag is very likely to have a mean that is significantly smaller than recipes with the tag 60_minutes_or_lessx
 
 ## Step 5: Framing a Prediction Problem
 Clearly state your prediction problem and type (classification or regression). If you are building a classifier, make sure to state whether you are performing binary classification or multiclass classification. Report the response variable (i.e. the variable you are predicting) and why you chose it, the metric you are using to evaluate your model and why you chose it over other suitable metrics (e.g. accuracy vs. F1-score).
