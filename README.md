@@ -24,6 +24,9 @@ By analyzing these features, we aim to uncover patterns that influence cooking t
 - NMAR Analysis: State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
 - Missingness Dependency: Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:• The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
 - The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
+- 
+![empirical missingness plot between review and minutes](images/reivew_mins_missingness.png)
+![empirical missingness plot between review and description](images/review_des_missingness.png)
 
 ## Step 4: Hypothesis Testing
 After looking at the data, we noted that there were tags that related to cooking time. In this hypothesis testing we will be focusing on recipes belonging to these two tags: "60-minutes-or-less" tag amd "30-minutes-or-less"
