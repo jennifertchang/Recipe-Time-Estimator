@@ -27,7 +27,7 @@ By analyzing these features, we aim to uncover patterns that influence cooking t
 - 
 ![empirical missingness plot between description and minutes](images/reivew_mins_missingness.png)
 ![empirical missingness plot between review and description](images/review_des_missingness.png)
-![empirical missingness plot between description and ratings](images/des_ratings_missingness.png)
+![empirical missingness plot between description and ratings](images/review_rating_missingness.png)
 
 ## Hypothesis Testing
 After looking at the data, we noted that there were tags that related to cooking time. In this hypothesis testing we will be focusing on recipes belonging to these two tags: "60-minutes-or-less" tag amd "30-minutes-or-less"
