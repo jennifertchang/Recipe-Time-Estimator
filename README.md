@@ -15,10 +15,40 @@ By analyzing these features, we aim to uncover patterns that influence cooking t
 
 
 ## Data Cleaning and Exploratory Data Analysis
-- Data Cleaning: Describe, in detail, the data cleaning steps you took and how they affected your analyses. The steps should be explained in reference to the data generating process. Show the head of your cleaned DataFrame (see Part 2: Report for instructions).
-- Univariate Analysis: Embed at least one plotly plot you created in your notebook that displays the distribution of a single column (see Part 2: Report for instructions). Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one univariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
+Data Cleaning Steps and Their Impact on Analysis
+1. Preparing Data
+The data frames were merged recipe_id
+A recipes_df was creating containing non duplicate recipe and replaced ratings with mean rating of that recipe
+using .drop_duplicates(subset=['recipe_id'], keep='first')
+went back to reassign ratings with mean rating
+
+3. Data Type Corrections
+Checked data types using .dtypes.
+Approach: Converted incorrect data types (e.g., string of list to list, string to float) using astype().
+‘tags’, 'steps', and 'ingredients' were converted from string to list of strings
+'nutrition' was converted from string to list of floats
+Impact: allowed easier manipulation in hypothesis testing and building our model.
+
+4. Handling Outliers
+Detected outliers using boxplot to visualize distribution of ‘minutes’, the main focus of our model and hypothesis testing.
+Approach: query to removed all recipes that took longer than a day (>1440 minutes)
+After examining recipes that took longer than a day often include marinating or letting the ingredients rest for a certain period of time, which introduces significant right skew into the data
+Impact: removed extreme values to make data less skewed.
+
+Univariate Analysis:
+![histogram of rating column](images/rating_histogram.png)
+Distribution of ‘rating’ column using histogram. ‘Ratings’ is heavily left-skewed with the majority of the data values being ‘5’. This makes sense as people are more inclined to write a review when they have something strong to say. 
+
+Bivariate Analysis:
+![scatter plot of minutes against n_steps](images/min_vs_nstep.png)
+A scatter plot of ‘minutes’ against ‘n_step’ with a linear line of best fit. The data is right-skewed even after removing extreme values (recipes that take over 1440 minutes). There were a lot of data points for recipes with 30 steps or less.  
+
+![scatter plot of average minutes against n_steps](images/ave_min_vs_nstep.png)
+Re-plotting ‘minutes’ against ‘n_steps’, but this time using the mean of minutes for each n_step value. This removes the clutter of duplicate values and shows the trendline more clearly. There appears to be a positive correlation between ‘n_steps’ and average ‘minutes’,  but as n_steps gets larger the average minute varies more and further from the line-of-best-fit.
+
 - Bivariate Analysis: Embed at least one plotly plot that displays the relationship between two columns. Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one bivariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
 - Interesting Aggregates: Embed at least one grouped table or pivot table in your website and explain its significance.
+
 
 ## Assessment of Missingness
 - NMAR Analysis: State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
