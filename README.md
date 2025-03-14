@@ -25,8 +25,9 @@ By analyzing these features, we aim to uncover patterns that influence cooking t
 - Missingness Dependency: Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:• The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
 - The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 - 
-![empirical missingness plot between review and minutes](images/reivew_mins_missingness.png)
+![empirical missingness plot between description and minutes](images/reivew_mins_missingness.png)
 ![empirical missingness plot between review and description](images/review_des_missingness.png)
+![empirical missingness plot between description and ratings](images/des_ratings_missingness.png)
 
 ## Hypothesis Testing
 After looking at the data, we noted that there were tags that related to cooking time. In this hypothesis testing we will be focusing on recipes belonging to these two tags: "60-minutes-or-less" tag amd "30-minutes-or-less"
