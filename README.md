@@ -64,7 +64,9 @@ Identified missing values using .isnull().sum(). The following columns were foun
 - MAR
     - The `review` column undergone further analysis for missingness mechanism
         - We suspected that the missingness of `review` could be MAR dependent on `rating` as people with strong opinions, especially strong positive opinions are more inclined to write a review
+
 After running a permutation test of 10,000 trials, we obtained a p-value of 0.02, which meant that the was a statistically significant difference in the distribution of ratings between where review is missing and where review is not missing.
+
 ![missingness condition on rating permutation histogram](images/rev_missing_vs_rating_MAR.png) 
 
 We suspected that missingness of `review` is not related to sugar pdv (percent daily value) since the sweetness or healthy-ness of a recipe does not seem like it would affect whether or not a review was written
