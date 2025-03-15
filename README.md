@@ -201,7 +201,7 @@ Below is a table representation of the pivot table that we created where we aggr
     </tr>
 </table>
 
-
+This pivot table is significant because by aggregating the data on the `rating` column, we can observe that the most reviews are written for recipes with ratings of 5 or 0. On the other hand, when people have a more neutral opinion (e.g., a rating of 3), they possibly feel less inclined to leave a review since they don't feel strongly in any direction. When examining the mean values for `minutes`, `n_steps`, and `n_ingredients` (quantitative variables), we see that recipes with a rating of 0 took the longest to complete, followed by recipes with a rating of 5, and then the others. However, the ordering of `n_steps` didn’t align exactly with the ranking of `minutes` because while recipes with a rating of 0 had the most steps on average, recipes with a rating of 5 had the second least. Furthermore, the relationship between the number of ingredients and ratings doesn't show a clear pattern, making it less interesting for analysis.
 
 ## Assessment of Missingness
 ### Handling Missing Values
