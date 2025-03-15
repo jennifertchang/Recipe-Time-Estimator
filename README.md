@@ -93,13 +93,13 @@ We trained 3 different linear regression models with the same columns that have 
 We chose the model using no transformation as our baseline model, as it performed best with unseen data and seen (lowest test MAE and lowest train MAE, our main metric for accuracy) out of all three models. We suspect this may be due to the fact that there is a fairly linear relationship between `n_steps`, `n_ingredients`, and `minutes`
 
 ### Model features
-Quantitative features
-n_steps: no processing needed
-n_ingredients: no processing needed
-Other types of features
-nutrition: split into respective macronutrient groups
-Each macronutrient column is a quantitative continuous feature after splitting
-No ordinal and nominal categories
+- Quantitative features
+    - n_steps: no processing needed
+    - n_ingredients: no processing needed
+- Other types of features
+    - nutrition: split into respective macronutrient groups
+        - Each macronutrient column is a quantitative continuous feature after splitting
+- No ordinal and nominal categories
 
 ### Model Performance 
 We believe that that model can still improve. The current model is nor performing the best, as it has a high MAE. The current model has a MAE of around 122 when performing with trained data, and it has a MAE of around 141 when applied to unseen data (test data). This is an average error of up to 2 hours from the actual `minutes` and that is a pretty big margin of error.
