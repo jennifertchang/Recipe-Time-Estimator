@@ -51,13 +51,24 @@ Re-plotting `minutes` against `n_steps`, but this time using the mean of minutes
 
 
 ## Assessment of Missingness
-- NMAR Analysis: State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
-- Missingness Dependency: Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:• The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
-- The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
-
-![empirical missingness plot between description and minutes](images/desc_mins_missingness.png)
-![empirical missingness plot between description and review](images/desc_review_missingness.png)
-![empirical missingness plot between description and ratings](images/desc_rating_missingness.png)
+### Handling Missing Values
+Identified missing values using .isnull().sum(). The following columns were found to have some missing values
+- `reviews` is missing 57 values
+- `name` is missing 1 value
+- `description` is 114 values
+- Approach: (e.g., Dropped rows with missing values in critical columns / Imputed missing values using the mean/median/mode).
+- We kept all the missing values since we did not need to use those columns for any of our hypothesis testing and model building
+### Assessing Missingness
+NMAR
+- We did not suspect any missingness to be NMAR.
+MAR
+- The `review` column undergone further analysis for missingness mechanism
+    - We suspected that the missingness of `review` could be MAR dependent on `rating` as people with strong opinions, especially strong positive opinions are more inclined to write a review
+![missingness condition on rating permutation histogram](images/rev_missing_vs_rating_MAR.png)
+After running a permutation test of 10,000 trials, we obtained a p-value of 0.02, which meant that the was a statistically significant difference in the distribution of ratings between where review is missing and where review is not missing. 
+    - We suspected that missingness of `review` is not related to sugar pdv (percent daily value) since the sweetness or healthy-ness of a recipe does not seem like it would affect whether or not a review was written
+![missingness condition on sugar permutation histogram](images/rev_missing_vs_sugar_MCAR.png)
+After running a permutation test of 10,000 trials, we obtained a p-value of 0.2272, which meant that the was not a statistically significant difference in the distribution of ratings between where review is missing and where review is not missing. 
 
 ## Hypothesis Testing
 After looking at the data, we noted that there were tags that related to cooking time. In this hypothesis testing we will be focusing on recipes belonging to these two tags: "60-minutes-or-less" tag amd "30-minutes-or-less"
