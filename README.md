@@ -84,11 +84,40 @@ Our baseline model is a linear regression model fit using 2+7 quantitative colum
 
 ### Transformations
 We trained 3 different linear regression models with the same columns that have undergone slightly different transformations. 
-|transformation                      |train RMSE|train MAE|test RMSE|test MAE|
-|------------------------------------|----------|---------|---------|--------|
-|no transformation                   | 1826.15  | 122.31  | 5120.09 | 140.93 |
-|only transform n_step, n_ingredients| 1826.65  | 123.95  | 5120.02 | 142.90 |
-|all columns transformed             | 1825.65  | 127.79  | 5120.19 | 146.27 |
+<table>
+  <thead>
+    <tr>
+      <th>Transformation</th>
+      <th>Train RMSE</th>
+      <th>Train MAE</th>
+      <th>Test RMSE</th>
+      <th>Test MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No transformation</td>
+      <td>1826.15</td>
+      <td>122.31</td>
+      <td>5120.09</td>
+      <td>140.93</td>
+    </tr>
+    <tr>
+      <td>Only transform n_step, n_ingredients</td>
+      <td>1826.65</td>
+      <td>123.95</td>
+      <td>5120.02</td>
+      <td>142.90</td>
+    </tr>
+    <tr>
+      <td>All columns transformed</td>
+      <td>1825.65</td>
+      <td>127.79</td>
+      <td>5120.19</td>
+      <td>146.27</td>
+    </tr>
+  </tbody>
+</table>
 
 We chose the model using no transformation as our baseline model, as it performed best with unseen data and seen (lowest test MAE and lowest train MAE, our main metric for accuracy) out of all three models. We suspect this may be due to the fact that there is a fairly linear relationship between `n_steps`, `n_ingredients`, and `minutes`
 
