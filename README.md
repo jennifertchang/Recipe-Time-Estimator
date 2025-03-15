@@ -17,10 +17,7 @@ By analyzing these features, we aim to uncover patterns that influence cooking t
 ## Data Cleaning and Exploratory Data Analysis
 Data Cleaning Steps and Their Impact on Analysis
 ### Preparing Data
-The data frames were merged recipe_id
-A recipes_df was creating containing non duplicate recipe and replaced ratings with mean rating of that recipe
-using .drop_duplicates(subset=[`recipe_id`], keep=`first`)
-went back to reassign ratings with mean rating
+The data frames were merged on recipe_id, creating a recipes_df containing unique recipes. The ratings were then replaced with the mean rating for each recipe. Duplicates were removed using .drop_duplicates(subset=[recipe_id], keep='first'), and the ratings were reassigned to reflect the mean rating for each recipe.
 
 ### Data Type Corrections
 Checked data types using .dtypes.
