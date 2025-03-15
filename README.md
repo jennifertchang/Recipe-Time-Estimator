@@ -261,7 +261,7 @@ max_depth = 45
 min_samples_leaf = 1
 min_samples_split = 3
 These values were selected based on iterative testing, where we minimized Mean Absolute Error (MAE) on both the training and test datasets. The tuning process helped balance the trade-off between model complexity and generalization to new data.
-The final model that we ended up implementing which performed with a higher accuracy is using Decision Tree Regression where we were able to achieve the highest accuracy in terms of MAE (mean absolute error) score. We used the best hyperparameters in our final model to further optimize its performance. Our final model's performance using Decision Tree Regression is an improvement over our baseline model's performance using Linear Regression because when comparing the accuracy metrics, the final model had a significantly lower MAE value. Initially, in the linear regression model, the MAE = 122.31 for the train_df and the MAE = 140.93 for the test_df. However, using the decision tree regressor (without hypertuning first), we got an MAE = 62.38 for the train_df and MAE = 99.09 for the test_df. After tuning certain hyperparameters used in the decision tree regressor model (max_depth, min_samples_leaf, and min_samples_split) and also adding two new features—one-hot encoding the top 50 most common ingredients and one-hot encoding time-related recipe tags, we predicted the MAE again on the same train_df and test_df, and got a MAE value of 6.34 and 45.15 respectively, which is significantly better than both the decision tree regressor without hyperparameter tuning and the baseline linear regression model that we initially wrote. 
+The final model that we ended up implementing which performed with a higher accuracy is using Decision Tree Regression where we were able to achieve the highest accuracy in terms of MAE (mean absolute error) score. We used the best hyperparameters in our final model to further optimize its performance. Our final model's performance using Decision Tree Regression is an improvement over our baseline model's performance using Linear Regression because when comparing the accuracy metrics, the final model had a significantly lower MAE value. Initially, in the linear regression model, the MAE = 122.31 for the train_df and the MAE = 140.93 for the test_df. However, using the decision tree regressor (without hypertuning first), we got an MAE = 74.83 for the train_df and MAE = 78.26 for the test_df. After tuning certain hyperparameters used in the decision tree regressor model (max_depth, min_samples_leaf, and min_samples_split) and also adding two new features—one-hot encoding the top 50 most common ingredients and one-hot encoding time-related recipe tags, we predicted the MAE again on the same train_df and test_df, and got a MAE value of 6.62 and 12.61 respectively, which is significantly better than both the decision tree regressor without hyperparameter tuning and the baseline linear regression model that we initially wrote. 
 
 <table>
   <tr>
@@ -276,13 +276,13 @@ The final model that we ended up implementing which performed with a higher accu
   </tr>
   <tr>
     <td><strong>Decision Tree (no tuning)</strong></td>
-    <td>62.38</td>
-    <td>99.09</td>
+    <td>74.83</td>
+    <td>78.26</td>
   </tr>
   <tr>
     <td><strong>Decision Tree (tuned, with new features)</strong></td>
-    <td><strong>6.34</strong></td>
-    <td><strong>45.15</strong></td>
+    <td><strong>6.62</strong></td>
+    <td><strong>12.61</strong></td>
   </tr>
 </table>
 
@@ -299,6 +299,6 @@ For our fairness analysis, we split the recipes into two groups: high sodium and
 Test Statistic: Difference in MAE (low sodium - high sodium)
 Significance Level: 0.05
 
-To run the permutation test, we created a new column, `is_high_sodium`, to differentiate between the high and low sodium recipes based on a sodium percentage daily value (sodium pdv) threshold of 15%. When we took the difference in their MAE, we got an observed test statistic of -21.12 minutes. We shuffled the `is_high_sodium` column 10,000 times to collect 10,000 simulated differences in the two distributions as described in the test statistic. After running our permutation test, we got a p-value of 0.0010. Since the p-value of 0.0010 is less than 0.05, we reject the null hypothesis that our model is fair. The model’s MAE for recipes with lower sodium is higher than its MAE for recipes with higher sodium.
+To run the permutation test, we created a new column, `is_high_sodium`, to differentiate between the high and low sodium recipes based on a sodium percentage daily value (sodium pdv) threshold of 15%. When we took the difference in their MAE, we got an observed test statistic of -10.91 minutes. We shuffled the `is_high_sodium` column 1,000 times to collect 1,000 simulated differences in the two distributions as described in the test statistic. After running our permutation test, we got a p-value of 0.0020. Since the p-value of 0.0020 is less than 0.05, we reject the null hypothesis that our model is fair. The model’s MAE for recipes with lower sodium is higher than its MAE for recipes with higher sodium.
 
 
