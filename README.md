@@ -36,96 +36,98 @@ After examining recipes that took longer than a day often include marinating or 
 Impact: removed extreme values to make data less skewed.
 
 This is what the first three rows of our dataframe looked like after cleaning
-<table>
-  <thead>
-    <tr>
-      <th>Recipe ID</th>
-      <th>Rating</th>
-      <th>Review</th>
-      <th>Name</th>
-      <th>Minutes</th>
-      <th>Tags</th>
-      <th>Nutrition</th>
-      <th>Steps Count</th>
-      <th>Steps</th>
-      <th>Description</th>
-      <th>Ingredients</th>
-      <th>Ingredient Count</th>
-      <th>Calories</th>
-      <th>Total Fat %DV</th>
-      <th>Sugar %DV</th>
-      <th>Sodium %DV</th>
-      <th>Protein %DV</th>
-      <th>Saturated Fat %DV</th>
-      <th>Carbohydrates %DV</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>306785</td>
-      <td>5</td>
-      <td>Being a huge fan of America's Test Kitchen I...</td>
-      <td>Spicy Nectarine and Corn Salsa</td>
-      <td>40</td>
-      <td>[60-minutes-or-less, time-to-make, course, main...]</td>
-      <td>[5.3, 1.0, 50.0, 16.0, 5.0, 0.0, 7.0]</td>
-      <td>4</td>
-      <td>[in a medium bowl toss together nectarines c...]</td>
-      <td>From my heroes at America's Test Kitchen (Cooks...)</td>
-      <td>[nectarines, ear of corn, shallot, habanero pe...]</td>
-      <td>8</td>
-      <td>5.3</td>
-      <td>1.0</td>
-      <td>50.0</td>
-      <td>16.0</td>
-      <td>5.0</td>
-      <td>0.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <td>310237</td>
-      <td>5</td>
-      <td>Wow! Red and white sweetness! DH loved them,...</td>
-      <td>French Strawberry Crepes</td>
-      <td>30</td>
-      <td>[30-minutes-or-less, time-to-make, course, main...]</td>
-      <td>[43.5, 5.0, 25.0, 3.0, 10.0, 3.0, 7.0]</td>
-      <td>9</td>
-      <td>[for the filling: toss the strawberries and br...]</td>
-      <td>Yummy and sweet French-style strawberry breakf...</td>
-      <td>[strawberries, brown sugar, cool whip free, fl...]</td>
-      <td>10</td>
-      <td>43.5</td>
-      <td>5.0</td>
-      <td>25.0</td>
-      <td>3.0</td>
-      <td>10.0</td>
-      <td>3.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <td>321038</td>
-      <td>5</td>
-      <td>Being a healthy bar, this is very good. I make...</td>
-      <td>HG's Grab 'n' Go Breakfast Cookies (Weight Wat...)</td>
-      <td>22</td>
-      <td>[30-minutes-or-less, time-to-make, course, prep...]</td>
-      <td>[82.4, 2.0, 50.0, 7.0, 11.0, 1.0, 13.0]</td>
-      <td>14</td>
-      <td>[preheat oven to 375 degrees, chop raisins and...]</td>
-      <td>I received a Hungry Girl email today and this ...</td>
-      <td>[oats, whole wheat flour, fiber one cereal, sp...]</td>
-      <td>14</td>
-      <td>82.4</td>
-      <td>2.0</td>
-      <td>50.0</td>
-      <td>7.0</td>
-      <td>11.0</td>
-      <td>1.0</td>
-      <td>13.0</td>
-    </tr>
-  </tbody>
-</table>
+<div style="overflow-x: auto; max-width: 100%;">
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Recipe ID</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Name</th>
+        <th>Minutes</th>
+        <th>Tags</th>
+        <th>Nutrition</th>
+        <th>Steps Count</th>
+        <th>Steps</th>
+        <th>Description</th>
+        <th>Ingredients</th>
+        <th>Ingredient Count</th>
+        <th>Calories</th>
+        <th>Total Fat %DV</th>
+        <th>Sugar %DV</th>
+        <th>Sodium %DV</th>
+        <th>Protein %DV</th>
+        <th>Saturated Fat %DV</th>
+        <th>Carbohydrates %DV</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>306785</td>
+        <td>5</td>
+        <td>Being a huge fan of America's Test Kitchen I...</td>
+        <td>Spicy Nectarine and Corn Salsa</td>
+        <td>40</td>
+        <td>[60-minutes-or-less, time-to-make, course, main...]</td>
+        <td>[5.3, 1.0, 50.0, 16.0, 5.0, 0.0, 7.0]</td>
+        <td>4</td>
+        <td>[in a medium bowl toss together nectarines c...]</td>
+        <td>From my heroes at America's Test Kitchen (Cooks...)</td>
+        <td>[nectarines, ear of corn, shallot, habanero pe...]</td>
+        <td>8</td>
+        <td>5.3</td>
+        <td>1.0</td>
+        <td>50.0</td>
+        <td>16.0</td>
+        <td>5.0</td>
+        <td>0.0</td>
+        <td>7.0</td>
+      </tr>
+      <tr>
+        <td>310237</td>
+        <td>5</td>
+        <td>Wow! Red and white sweetness! DH loved them,...</td>
+        <td>French Strawberry Crepes</td>
+        <td>30</td>
+        <td>[30-minutes-or-less, time-to-make, course, main...]</td>
+        <td>[43.5, 5.0, 25.0, 3.0, 10.0, 3.0, 7.0]</td>
+        <td>9</td>
+        <td>[for the filling: toss the strawberries and br...]</td>
+        <td>Yummy and sweet French-style strawberry breakf...</td>
+        <td>[strawberries, brown sugar, cool whip free, fl...]</td>
+        <td>10</td>
+        <td>43.5</td>
+        <td>5.0</td>
+        <td>25.0</td>
+        <td>3.0</td>
+        <td>10.0</td>
+        <td>3.0</td>
+        <td>7.0</td>
+      </tr>
+      <tr>
+        <td>321038</td>
+        <td>5</td>
+        <td>Being a healthy bar, this is very good. I make...</td>
+        <td>HG's Grab 'n' Go Breakfast Cookies (Weight Wat...)</td>
+        <td>22</td>
+        <td>[30-minutes-or-less, time-to-make, course, prep...]</td>
+        <td>[82.4, 2.0, 50.0, 7.0, 11.0, 1.0, 13.0]</td>
+        <td>14</td>
+        <td>[preheat oven to 375 degrees, chop raisins and...]</td>
+        <td>I received a Hungry Girl email today and this ...</td>
+        <td>[oats, whole wheat flour, fiber one cereal, sp...]</td>
+        <td>14</td>
+        <td>82.4</td>
+        <td>2.0</td>
+        <td>50.0</td>
+        <td>7.0</td>
+        <td>11.0</td>
+        <td>1.0</td>
+        <td>13.0</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
 ### Univariate Analysis:
