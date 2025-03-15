@@ -17,33 +17,35 @@ By analyzing these features, we aim to uncover patterns that influence cooking t
 ## Data Cleaning and Exploratory Data Analysis
 Data Cleaning Steps and Their Impact on Analysis
 ### Preparing Data
-- The data frames were merged recipe_id
-- A recipes_df was creating containing non duplicate recipe and replaced ratings with mean rating of that recipe using .drop_duplicates(subset=['recipe_id'], keep='first')
-- Went back to reassign ratings with mean rating
+The data frames were merged recipe_id
+A recipes_df was creating containing non duplicate recipe and replaced ratings with mean rating of that recipe
+using .drop_duplicates(subset=[`recipe_id`], keep=`first`)
+went back to reassign ratings with mean rating
 
 ### Data Type Corrections
 Checked data types using .dtypes.
-- Approach: Converted incorrect data types (e.g., string of list to list, string to float) using astype().
-    - ‘tags’, 'steps', and 'ingredients' were converted from string to list of strings
-    - 'nutrition' was converted from string to list of floats
-- Impact: allowed easier manipulation in hypothesis testing and building our model.
+Approach: Converted incorrect data types (e.g., string of list to list, string to float) using astype().
+`tags`, `steps`, and `ingredients` were converted from string to list of strings
+`nutrition` was converted from string to list of floats
+Impact: allowed easier manipulation in hypothesis testing and building our model.
 
 ### Handling Outliers
-- Detected outliers using boxplot to visualize distribution of ‘minutes’, the main focus of our model and hypothesis testing.
-- Approach: query to removed all recipes that took longer than a day (>1440 minutes)
-- After examining recipes that took longer than a day often include marinating or letting the ingredients rest for a certain period of time, which introduces significant right skew into the data
-- Impact: removed extreme values to make data less skewed.
+Detected outliers using boxplot to visualize distribution of `minutes`, the main focus of our model and hypothesis testing.
+Approach: query to removed all recipes that took longer than a day (>1440 minutes)
+After examining recipes that took longer than a day often include marinating or letting the ingredients rest for a certain period of time, which introduces significant right skew into the data
+Impact: removed extreme values to make data less skewed.
+
 
 ### Univariate Analysis:
 ![histogram of rating column](images/rating_histogram.png)
-Distribution of ‘rating’ column using histogram. ‘Ratings’ is heavily left-skewed with the majority of the data values being ‘5’. This makes sense as people are more inclined to write a review when they have something strong to say. 
+Distribution of `rating` column using histogram. `Ratings` is heavily left-skewed with the majority of the data values being `5`. This makes sense as people are more inclined to write a review when they have something strong to say.  
 
 ### Bivariate Analysis:
 ![scatter plot of minutes against n_steps](images/min_vs_nstep.png)
-A scatter plot of ‘minutes’ against ‘n_step’ with a linear line of best fit. The data is right-skewed even after removing extreme values (recipes that take over 1440 minutes). There were a lot of data points for recipes with 30 steps or less.  
+A scatter plot of `minutes` against `n_step` with a linear line of best fit. The data is right-skewed even after removing extreme values (recipes that take over 1440 minutes). There were a lot of data points for recipes with 30 steps or less.  
 
 ![scatter plot of average minutes against n_steps](images/ave_min_vs_nstep.png)
-Re-plotting ‘minutes’ against ‘n_steps’, but this time using the mean of minutes for each n_step value. This removes the clutter of duplicate values and shows the trendline more clearly. There appears to be a positive correlation between ‘n_steps’ and average ‘minutes’,  but as n_steps gets larger the average minute varies more and further from the line-of-best-fit.
+Re-plotting `minutes` against `n_steps`, but this time using the mean of minutes for each n_step value. This removes the clutter of duplicate values and shows the trendline more clearly. There appears to be a positive correlation between `n_steps` and average `minutes`,  but as n_steps gets larger the average minute varies more and further from the line-of-best-fit.
 
 - Interesting Aggregates: Embed at least one grouped table or pivot table in your website and explain its significance.
 
@@ -52,7 +54,7 @@ Re-plotting ‘minutes’ against ‘n_steps’, but this time using the mean of
 - NMAR Analysis: State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
 - Missingness Dependency: Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:• The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
 - The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
-- 
+
 ![empirical missingness plot between description and minutes](images/desc_mins_missingness.png)
 ![empirical missingness plot between description and review](images/desc_review_missingness.png)
 ![empirical missingness plot between description and ratings](images/desc_rating_missingness.png)
@@ -78,9 +80,29 @@ At the “time of prediction”, we would know the number of steps in the recipe
 
 
 ## Baseline Model
-Describe your model and state the features in your model, including how many are quantitative, ordinal, and nominal, and how you performed any necessary encodings. Report the performance of your model and whether or not you believe your current model is “good” and why.
+Our baseline model is a linear regression model fit using 2+7 quantitative columns,  `n_steps` column, the `n_ingredients` column, and we engineered the `nutrition` column, into 7 separate columns (`calories`, `total fat pdv`, `sugar pdv`, `sodium pdv`, `protein pdv`, `saturated fat pdv`, `carbohydrates pdv`), each representing a value from the nutrition column.
 
-Tip: Make sure to hit all of the points above: many projects in the past have lost points for not doing so.
+### Transformations
+We trained 3 different linear regression models with the same columns that have undergone slightly different transformations. 
+|transformation                      |train RMSE|train MAE|test RMSE|test MAE|
+|------------------------------------|----------|---------|---------|--------|
+|no transformation                   | 1826.15  | 122.31  | 5120.09 | 140.93 |
+|only transform n_step, n_ingredients| 1826.65  | 123.95  | 5120.02 | 142.90 |
+|all columns transformed             | 1825.65  | 127.79  | 5120.19 | 146.27 |
+
+We chose the model using no transformation as our baseline model, as it performed best with unseen data and seen (lowest test MAE and lowest train MAE, our main metric for accuracy) out of all three models. We suspect this may be due to the fact that there is a fairly linear relationship between `n_steps`, `n_ingredients`, and `minutes`
+
+### Model features
+Quantitative features
+n_steps: no processing needed
+n_ingredients: no processing needed
+Other types of features
+nutrition: split into respective macronutrient groups
+Each macronutrient column is a quantitative continuous feature after splitting
+No ordinal and nominal categories
+
+### Model Performance 
+We believe that that model can still improve. The current model is nor performing the best, as it has a high MAE. The current model has a MAE of around 122 when performing with trained data, and it has a MAE of around 141 when applied to unseen data (test data). This is an average error of up to 2 hours from the actual `minutes` and that is a pretty big margin of error.
 
 ## Final Model
 Final Model: State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
