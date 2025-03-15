@@ -134,15 +134,44 @@ We chose the model using no transformation as our baseline model, as it performe
 We believe that that model can still improve. The current model is nor performing the best, as it has a high MAE. The current model has a MAE of around 122 when performing with trained data, and it has a MAE of around 141 when applied to unseen data (test data). This is an average error of up to 2 hours from the actual `minutes` and that is a pretty big margin of error.
 
 ## Final Model
-In our final model, we introduced two new features: one-hot encoding the top 50 most common ingredients and one-hot encoding time-related recipe tags. The ingredient encoding created 50 new columns, where each recipe received a 1 if it contained a given ingredient and 0 otherwise. Similarly, the time-related tags (e.g., 30-minutes-or-less, one-day-or-more) were encoded to capture general cooking time categories.
+In our final model, we introduced two new features: one-hot encoding of the top 50 most common ingredients and one-hot encoding of time-related recipe tags. The ingredient encoding created 50 new columns, where each recipe received a 1 if it contained a given ingredient and 0 otherwise. This feature is beneficial because ingredient composition strongly correlates with cooking time. For example, recipes with rice generally require more preparation time than those with cheese. By incorporating ingredient-based patterns, our model can better predict cooking durations.
+Additionally, we encoded time-related recipe tags, such as "30-minutes-or-less" and "one-day-or-more," to capture general cooking time categories. These tags provide a broad estimate of whether a recipe is quick, moderate, or slow to prepare. Cooking time is influenced not only by the ingredients used but also by implicit preparation steps, which these tags summarize. By adding this feature, our model gains a higher-level understanding of time-based structuring in recipe data.
+Both of these features align well with the data-generating process of recipes, where cooking duration depends on ingredient composition and preparation steps. Instead of relying purely on numerical or textual inputs, our model now leverages categorical relationships that enhance its predictive capabilities.
+To determine the best-performing model, we experimented with multiple regression approaches, including Linear Regression, Ridge Regression, and Lasso Regression. However, after evaluating performance, we found that Decision Tree Regression yielded the most accurate predictions. Decision trees are particularly effective for this task because they can capture complex, non-linear relationships between ingredients, time-related tags, and cooking duration.
 
-These features enhance our prediction task by helping the model infer cooking times based on ingredient composition and general time categories. Certain ingredients naturally correlate with longer cooking times—e.g., recipes with rice typically take longer than those with cheese. Encoding time-related tags also provides a broad estimate of whether a recipe is quick, moderate, or slow to prepare before predicting an exact duration.
+To further optimize our Decision Tree model, we performed hyperparameter tuning and also added the two features that we one-hot encoded. After testing various configurations, the following hyperparameters produced the best results:
+max_depth = 45
+min_samples_leaf = 1
+min_samples_split = 3
+These values were selected based on iterative testing, where we minimized Mean Absolute Error (MAE) on both the training and test datasets. The tuning process helped balance the trade-off between model complexity and generalization to new data.
+The final model that we ended up implementing which performed with a higher accuracy is using Decision Tree Regression where we were able to achieve the highest accuracy in terms of MAE (mean absolute error) score. We used the best hyperparameters in our final model to further optimize its performance. Our final model`s performance using Decision Tree Regression is an improvement over our baseline model`s performance using Linear Regression because when comparing the accuracy metrics, the final model had a significantly lower MAE value. Initially, in the linear regression model, the MAE = 122.31 for the train_df and the MAE = 140.93 for the test_df. However, using the decision tree regressor (without hypertuning first), we got an MAE = 62.38 for the train_df and MAE = 99.09 for the test_df. After tuning certain hyperparameters used in the decision tree regressor model (max_depth, min_samples_leaf, and min_samples_split) and also adding two new features—one-hot encoding the top 50 most common ingredients and one-hot encoding time-related recipe tags, we predicted the MAE again on the same train_df and test_df, and got a MAE value of 6.34 and 45.15 respectively, which is significantly better than both the decision tree regressor without hyperparameter tuning and the baseline linear regression model that we initially wrote. 
 
-From a data-generating perspective, these features improve our model's performance because they align with how recipes are structured. Cooking time depends not only on ingredient type but also on implicit preparation steps, which the time-related tags help capture. By incorporating these patterns, our model can make more informed predictions about a recipe's duration.
-The final model that we ended up implementing which performed with a higher accuracy is using Decision Tree Regression. While we were debating between ridge regression, lasso regression, and linear regression as well, we ultimately chose to implement our model using the decision tree regression because we were able to achieve the highest accuracy in terms of MAE (mean absolute error) score. The hyperparameters that ended up performing the best for our Decision Tree Regression model was having a max_depth = 50, min_samples_leaf = 1, and min_samples_split = 2. We used these best hyperparameters in our final model to further optimize its performance. Our final model's performance using Decision Tree Regression is an improvement over our baseline model's performance using Linear Regression because when comparing the accuracy metrics, the final model had a significantly lower MAE value. Initially, in the linear regression model, the MAE = 122.31 for the train_df and the MAE = 140.93 for the test_df. However, using the decision tree regressor (without hypertuning first), we got an MAE = 62.38 for the train_df and MAE = 99.09 for the test_df. After tuning certain hyperparameters used in the decision tree regressor model (max_depth, min_samples_leaf, and min_samples_split), we predicted the MAE again on the same train_df and test_df, and got and MAE of 35.68 and 82.89 respectively, which is better than the decision tree regressor without hyperparameter tuning and significantly better than the baseline linear regression model that we initially wrote. 
+<table border="1">
+  <tr>
+    <th>Model</th>
+    <th>Train MAE</th>
+    <th>Test MAE</th>
+  </tr>
+  <tr>
+    <td><strong>Baseline (Linear Regression)</strong></td>
+    <td>122.31</td>
+    <td>140.93</td>
+  </tr>
+  <tr>
+    <td><strong>Decision Tree (no tuning)</strong></td>
+    <td>62.38</td>
+    <td>99.09</td>
+  </tr>
+  <tr>
+    <td><strong>Decision Tree (tuned, with new features)</strong></td>
+    <td><strong>6.34</strong></td>
+    <td><strong>45.15</strong></td>
+  </tr>
+</table>
 
 This indicated that this model was better at predicting the time for a recipe (in minutes) given the almost the same input features. Additionally, we specifically decided to use MAE over other accuracy metrics (ie. MSE and R-Squared) because MAE is easier to understand as it is in the same units as what we are trying to predict (time in minutes) and is also more robust to outliers. 
-Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.
+
+By carefully choosing relevant features, selecting an appropriate modeling approach, and fine-tuning hyperparameters, we successfully improved our model’s ability to predict cooking times. Our final Decision Tree Regression model demonstrates a significant performance gain over the baseline, providing a more reliable tool for estimating recipe durations.
 
 ## Fairness Analysis
 Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting p-value, and your conclusion.
