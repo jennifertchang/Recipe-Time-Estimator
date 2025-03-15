@@ -35,6 +35,98 @@ Approach: query to removed all recipes that took longer than a day (>1440 minute
 After examining recipes that took longer than a day often include marinating or letting the ingredients rest for a certain period of time, which introduces significant right skew into the data
 Impact: removed extreme values to make data less skewed.
 
+This is what the first three rows of our dataframe looked like after cleaning
+<table border="1">
+  <thead>
+    <tr>
+      <th>Recipe ID</th>
+      <th>Rating</th>
+      <th>Review</th>
+      <th>Name</th>
+      <th>Minutes</th>
+      <th>Tags</th>
+      <th>Nutrition</th>
+      <th>Steps Count</th>
+      <th>Steps</th>
+      <th>Description</th>
+      <th>Ingredients</th>
+      <th>Ingredient Count</th>
+      <th>Calories</th>
+      <th>Total Fat %DV</th>
+      <th>Sugar %DV</th>
+      <th>Sodium %DV</th>
+      <th>Protein %DV</th>
+      <th>Saturated Fat %DV</th>
+      <th>Carbohydrates %DV</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>306785</td>
+      <td>5</td>
+      <td>Being a huge fan of America's Test Kitchen I...</td>
+      <td>Spicy Nectarine and Corn Salsa</td>
+      <td>40</td>
+      <td>[60-minutes-or-less, time-to-make, course, main...]</td>
+      <td>[5.3, 1.0, 50.0, 16.0, 5.0, 0.0, 7.0]</td>
+      <td>4</td>
+      <td>[in a medium bowl toss together nectarines c...]</td>
+      <td>From my heroes at America's Test Kitchen (Cooks...)</td>
+      <td>[nectarines, ear of corn, shallot, habanero pe...]</td>
+      <td>8</td>
+      <td>5.3</td>
+      <td>1.0</td>
+      <td>50.0</td>
+      <td>16.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <td>310237</td>
+      <td>5</td>
+      <td>Wow! Red and white sweetness! DH loved them,...</td>
+      <td>French Strawberry Crepes</td>
+      <td>30</td>
+      <td>[30-minutes-or-less, time-to-make, course, main...]</td>
+      <td>[43.5, 5.0, 25.0, 3.0, 10.0, 3.0, 7.0]</td>
+      <td>9</td>
+      <td>[for the filling: toss the strawberries and br...]</td>
+      <td>Yummy and sweet French-style strawberry breakf...</td>
+      <td>[strawberries, brown sugar, cool whip free, fl...]</td>
+      <td>10</td>
+      <td>43.5</td>
+      <td>5.0</td>
+      <td>25.0</td>
+      <td>3.0</td>
+      <td>10.0</td>
+      <td>3.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <td>321038</td>
+      <td>5</td>
+      <td>Being a healthy bar, this is very good. I make...</td>
+      <td>HG's Grab 'n' Go Breakfast Cookies (Weight Wat...)</td>
+      <td>22</td>
+      <td>[30-minutes-or-less, time-to-make, course, prep...]</td>
+      <td>[82.4, 2.0, 50.0, 7.0, 11.0, 1.0, 13.0]</td>
+      <td>14</td>
+      <td>[preheat oven to 375 degrees, chop raisins and...]</td>
+      <td>I received a Hungry Girl email today and this ...</td>
+      <td>[oats, whole wheat flour, fiber one cereal, sp...]</td>
+      <td>14</td>
+      <td>82.4</td>
+      <td>2.0</td>
+      <td>50.0</td>
+      <td>7.0</td>
+      <td>11.0</td>
+      <td>1.0</td>
+      <td>13.0</td>
+    </tr>
+  </tbody>
+</table>
+
 
 ### Univariate Analysis:
 ![histogram of rating column](images/rating_histogram.png)
@@ -219,7 +311,7 @@ min_samples_split = 3
 These values were selected based on iterative testing, where we minimized Mean Absolute Error (MAE) on both the training and test datasets. The tuning process helped balance the trade-off between model complexity and generalization to new data.
 The final model that we ended up implementing which performed with a higher accuracy is using Decision Tree Regression where we were able to achieve the highest accuracy in terms of MAE (mean absolute error) score. We used the best hyperparameters in our final model to further optimize its performance. Our final model's performance using Decision Tree Regression is an improvement over our baseline model's performance using Linear Regression because when comparing the accuracy metrics, the final model had a significantly lower MAE value. Initially, in the linear regression model, the MAE = 122.31 for the train_df and the MAE = 140.93 for the test_df. However, using the decision tree regressor (without hypertuning first), we got an MAE = 62.38 for the train_df and MAE = 99.09 for the test_df. After tuning certain hyperparameters used in the decision tree regressor model (max_depth, min_samples_leaf, and min_samples_split) and also adding two new features—one-hot encoding the top 50 most common ingredients and one-hot encoding time-related recipe tags, we predicted the MAE again on the same train_df and test_df, and got a MAE value of 6.34 and 45.15 respectively, which is significantly better than both the decision tree regressor without hyperparameter tuning and the baseline linear regression model that we initially wrote. 
 
-<table border="1">
+<table>
   <tr>
     <th>Model</th>
     <th>Train MAE</th>
