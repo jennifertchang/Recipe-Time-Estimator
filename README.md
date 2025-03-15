@@ -47,7 +47,66 @@ A scatter plot of `minutes` against `n_step` with a linear line of best fit. The
 ![scatter plot of average minutes against n_steps](images/ave_min_vs_nstep.png)
 Re-plotting `minutes` against `n_steps`, but this time using the mean of minutes for each n_step value. This removes the clutter of duplicate values and shows the trendline more clearly. There appears to be a positive correlation between `n_steps` and average `minutes`,  but as n_steps gets larger the average minute varies more and further from the line-of-best-fit.
 
-- Interesting Aggregates: Embed at least one grouped table or pivot table in your website and explain its significance.
+### Interesting Aggregates:
+Below is a table representation of the pivot table that we created where we aggregated data from the original DataFrame by the rating column. For each unique rating value, it performs the following operations:
+
+- Review Count (`review`): It calculates the count of entries for each rating, which represents how many reviews correspond to each rating.
+- Mean Minutes (`minutes`): It calculates the average number of minutes associated with each rating.
+- Mean Number of Steps (`n_steps`): It calculates the average number of steps for each rating.
+- Mean Number of Ingredients (`n_ingredients`): It calculates the average number of ingredients for each rating.
+
+<table border="1">
+    <tr>
+        <th>rating</th>
+        <th>review</th>
+        <th>minutes</th>
+        <th>n_steps</th>
+        <th>n_ingredients</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>15035</td>
+        <td>154.949252</td>
+        <td>11.270968</td>
+        <td>9.222215</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2869</td>
+        <td>99.672474</td>
+        <td>10.629965</td>
+        <td>8.912892</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>2368</td>
+        <td>98.021537</td>
+        <td>10.697635</td>
+        <td>9.229730</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>7171</td>
+        <td>87.497630</td>
+        <td>9.992052</td>
+        <td>9.200920</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>37297</td>
+        <td>91.585038</td>
+        <td>9.577425</td>
+        <td>9.100759</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>169631</td>
+        <td>106.923878</td>
+        <td>9.984901</td>
+        <td>9.046748</td>
+    </tr>
+</table>
+
 
 
 ## Assessment of Missingness
