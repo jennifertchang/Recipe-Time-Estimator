@@ -36,7 +36,7 @@ After examining recipes that took longer than a day often include marinating or 
 Impact: removed extreme values to make data less skewed.
 
 This is what the first three rows of our dataframe looked like after cleaning
-<table border="1">
+<table>
   <thead>
     <tr>
       <th>Recipe ID</th>
@@ -147,7 +147,7 @@ Below is a table representation of the pivot table that we created where we aggr
 - Mean Number of Steps (`n_steps`): It calculates the average number of steps for each rating.
 - Mean Number of Ingredients (`n_ingredients`): It calculates the average number of ingredients for each rating.
 
-<table border="1">
+<table>
     <tr>
         <th>rating</th>
         <th>review</th>
