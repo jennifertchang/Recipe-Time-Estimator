@@ -172,7 +172,7 @@ After running a permutation test of 10,000 trials, we obtained a p-value of 0.02
 We hypothesize that the missingness of the review variable is not associated with the sugar pdv (percent daily value), as the sweetness or healthiness of a recipe does not appear to influence the likelihood of a review being written.
 
 ![missingness condition on sugar permutation histogram](images/rev_missing_vs_sugar_MCAR.png)
-After running a permutation test of 10,000 trials, we obtained a p-value of 0.2272, which meant that the was not a statistically significant difference in the distribution of ratings between where review is missing and where review is not missing. 
+After running a permutation test of 10,000 trials, we obtained a p-value of 0.2272, which meant that there was not a statistically significant difference in the distribution of ratings between where review is missing and where review is not missing. 
 
 ## Hypothesis Testing
 After looking at the data, we noted that there were tags that related to cooking time. In this hypothesis testing we will be focusing on recipes belonging to these two tags: "60-minutes-or-less" tag amd "30-minutes-or-less"
