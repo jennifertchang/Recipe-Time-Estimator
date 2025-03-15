@@ -291,10 +291,11 @@ By carefully choosing relevant features, selecting an appropriate modeling appro
 ## Fairness Analysis
 For our fairness analysis, we split the recipes into two groups: high sodium and low sodium. We designated high sodium recipes to be ones with a sodium percentage daily value (sodium pdv) > 15%, and low sodium recipes to be ones with sodium pdv <= 15%. We chose 15% as the threshold because it is a common guideline for sodium intake in nutritional information. We used sodium pdv as the feature of interest because it is directly related to the health implications of the recipe, and it might influence how long it takes to prepare or finish the recipe. We chose to evaluate the mean absolute error (MAE) parity of the model for the two groups because we believe that it is more important for the model to provide accurate time estimates for all types of recipes, regardless of their sodium content. Larger errors in the estimated minutes can mislead users about how long they need to prepare or cook a recipe, potentially causing issues with meal planning and expectations. For example, if a recipe with low sodium is predicted to take significantly longer than it actually does, it could discourage users from trying healthier recipes.
 
-- Null Hypothesis: Our model is fair. Its MAE for recipes with higher sodium and lower sodium are roughly the same, and any differences are due to random chance.
-- Alternative Hypothesis: Our model is unfair. Its MAE for recipes with lower sodium is higher than its MAE for recipes with higher sodium.
+- H_0 (Null Hypothesis): Our model is fair. Its MAE for recipes with higher sodium and lower sodium are roughly the same, and any differences are due to random chance.
+- H_A (Alternative Hypothesis): Our model is unfair. Its MAE for recipes with lower sodium is higher than its MAE for recipes with higher sodium.
 
 Test Statistic: Difference in MAE (low sodium - high sodium)
+
 Significance Level: 0.05
 
 To run the permutation test, we created a new column, `is_high_sodium`, to differentiate between the high and low sodium recipes based on a sodium percentage daily value (sodium pdv) threshold of 15%. When we took the difference in their MAE, we got an observed test statistic of -10.91 minutes. We shuffled the `is_high_sodium` column 1,000 times to collect 1,000 simulated differences in the two distributions as described in the test statistic. After running our permutation test, we got a p-value of 0.0020. Since the p-value of 0.0020 is less than 0.05, we reject the null hypothesis that our model is fair. The model’s MAE for recipes with lower sodium is higher than its MAE for recipes with higher sodium.
